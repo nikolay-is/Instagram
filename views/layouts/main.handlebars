@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Instagram</title>
+  <link href="/css/site.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <ul class="menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        {{#if currentUser}}
+          <li><a href="/add">Add image</a></li>
+        {{/if}}
+        <li class="delimeter"></li>
+        {{#if isAdmin}}
+          <li class="align-right"><a href="/admins/add">Add admin</a></li>
+          <li class="align-right"><a href="/admins/all">Admins all</a></li>
+        {{/if}}
+        {{#if currentUser}}
+          <li class="align-right">
+              <form id="logout-form" action="/users/logout" method="POST"></form>
+              <a href="javascript:document.getElementById('logout-form').submit()">Logout</a>
+          </li>
+        {{else}}
+          <li class="align-right"><a href="/users/register">Register</a></li>
+          <li class="align-right"><a href="/users/login">Login</a></li>
+        {{/if}}
+        {{#if currentUser}}
+          <li class="align-right"><a href="/profile/{{currentUser.username}}">{{currentUser.username}}</a></li>
+        {{/if}}
+      </ul>
+    </nav>
+    {{#if globalError}}
+      <h2 class="error-msg">{{globalError}}</h2>
+    {{else}}
+      <h2 class="success-msg">{{globalError}}</h2>
+    {{/if}}
+    <main>
+      {{{body}}}
+    </main>
+  </div>
+</body>
+<footer>
+  &copy;Instagram
+</footer>
+</html>

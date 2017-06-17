@@ -1,0 +1,15 @@
+<h2>Delete Image</h2>
+
+<form class="form center-form" method="POST">
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <textarea name="description" disabled maxlenght="500" id="description-id" cols="30" rows="10">{{image.description}}</textarea>
+  </div>
+  <div class="form-group">
+    <label for="url">Image URL:</label>
+    <input type="text" disabled name="url" value="{{image.url}}"/>
+  </div>
+  <div class="form-group">
+    <input class="form-btn btn btn-danger" type="submit" value="Delete">
+  </div>
+</form>

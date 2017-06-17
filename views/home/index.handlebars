@@ -1,0 +1,37 @@
+<h1 class="head-title">Hi! Instagram </h1>
+
+{{!--<div class="items">--}}
+  {{#each images}}
+    <div class="items">
+      <div class="form-group">
+        <p><a class="btn btn-primary" href="/profile/{{this.author.username}}">{{this.author.username}}</a>
+          <i>({{this.author.firstName}} {{this.author.lastName}})</i> <span>&nbsp;<strong>Likes:</strong>&nbsp;<i>{{this.likes}}</i>&nbsp;<strong>&nbsp;Views:&nbsp;</strong><i>{{this.views}}</i></span></p>
+        <p>{{this.date}}</p>
+        <p>{{this.description}}</p>
+        <img class="image" src="{{this.url}}" alt="{{this.url}}">
+         <div class="form-group">Tags:
+          {{#each this.tags}}
+            <a class="btn btn-warning" href="/tag/{{this}}">{{this}}</a>
+          {{/each}}
+         </div>
+      </div>
+      <div class="form-group">    
+        {{#if ../currentUser}}
+          {{#hasLiked ../currentUser this.id}}
+            <form class="form center-form" id="dislike{{this.id}}" action="/dislike/{{this.id}}" method="post"></form>
+            <a class="btn btn-danger" href="javascript:document.getElementById('dislike{{this.id}}').submit()">Dislike</a>
+          {{else}}
+            <form class="form center-form" id="like{{this.id}}" action="/like/{{this.id}}" method="post"></form>
+            <a class="btn btn-success" href="javascript:document.getElementById('like{{this.id}}').submit()">Like</a>
+          {{/hasLiked}}
+        {{/if}}
+        {{#if ../isAdmin}}
+          <a class="btn btn-success" href="/edit/{{this._id}}">Edit</a>
+          <a class="btn btn-danger" href="/delete/{{this._id}}">Delete</a>
+        {{/if}}
+      </div>
+    </div>
+  {{else}}
+    <p>No data to show.</p>
+  {{/each}}
+{{!--</div>--}}
